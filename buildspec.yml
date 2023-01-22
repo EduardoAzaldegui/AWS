@@ -1,0 +1,27 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      java: corretto17
+  pre_build:
+    commands:
+      - echo Nothing to do in the pre_build phase...
+  build:
+    commands:
+      - echo Build started on `date`
+      - mvn install
+      - mv target/myapp-0.0.1-SNAPSHOT.war dropApp.war
+      - cp scripts/start_server.sh start_server.sh
+      - cp scripts/stop_server.sh stop_server.sh
+  post_build:
+    commands:
+      - echo Build completed on `date`
+      - echo list
+      - ls .
+artifacts:
+  files:
+    - dropApp.war
+    - stop_server.sh
+    - start_server.sh
+    - appspec.yml

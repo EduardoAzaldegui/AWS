@@ -1,0 +1,12 @@
+version: 0.0
+os: linux
+files:
+  - source: dropApp.war
+    destination: /home/ec2-user/docker/data
+hooks:
+  ApplicationStop:
+    - location: stop_server.sh
+      timeout: 300
+  ApplicationStart:
+    - location: start_server.sh
+      timout: 300
